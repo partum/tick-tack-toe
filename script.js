@@ -42,7 +42,7 @@ function newH1(){
 }
 function recordMoves(theID){
     if (move == 'O'){
-        oMoves.push(theID)
+        oMoves.push(parseInt(theID))
     }
     else if (move == 'X'){
         xMoves.push(theID)
@@ -50,4 +50,12 @@ function recordMoves(theID){
     if (winCombos.includes(oMoves)){
         console.log('✌')
     }
+    console.log(oMoves)
+    console.log(winCombos)
+    
+    for(var i=0;i<a.length;i++) 
+        if(a[i]!=b[i]) 
+          return "False"; 
+        return "True"; 
+    
 }
