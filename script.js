@@ -44,6 +44,7 @@ function newH1(won){
     if (won == true){
         whoseTurn();
         document.getElementById("guide").innerHTML = move + " won!";
+        shutItDown();
     }
 }
 function recordMoves(theID){
@@ -56,4 +57,17 @@ function recordMoves(theID){
     if (winCombos.includes(xMoves) || winCombos.includes(oMoves)){
         won = true;
     }    
+}
+function shutItDown(){
+    for (i=0; i<9; i++){
+        document.getElementById(i).removeEventListener("click", displayMove);
+    }
+    document.getElementById("start").style.visibility = "visible";
+}
+function setItUp(){
+    for (i=0; i<9; i++){
+        document.getElementById(i).addEventListener("click", displayMove);
+        document.getElementById(i).innerHTML = "";
+    }
+    document.getElementById("start").style.visibility = "hidden";
 }

@@ -54,6 +54,7 @@ button {
   width: 8rem;
   font-size: 2rem;
   visibility: hidden;
+  cursor: pointer;
 }
 
 footer {
