@@ -1,16 +1,17 @@
 var move = 'O'
 var choice = '#FF858D'
-var xMoves = []
+var xMoves = ""
 var oMoves = []
+var won = false
 const winCombos = [
-    [0,1,2],
-    [3,4,5],
-    [6,7,8],
-    [0,3,6],
-    [1,4,7],
-    [2,5,8],
-    [0,4,8],
-    [2,4,6]
+    "012",
+    "345",
+    "678",
+    "036",
+    "147",
+    "258",
+    "048",
+    "246"
 ]
 const cells = document.querySelectorAll('.cells')
 for (i=0; i<9; i++){
@@ -21,12 +22,12 @@ setTimeout(newH1, 4000)
 
 function whoseTurn(){
     if (move == 'O'){
-        move = 'X'
-        choice = '#ff9fe5'
+        move = 'X';
+        choice = '#ff9fe5';
     }
     else if(move == 'X'){
-        move = 'O'
-        choice = '#FF858D'
+        move = 'O';
+        choice = '#FF858D';
     }  
 }
 function displayMove(){
@@ -35,27 +36,24 @@ function displayMove(){
     document.getElementById(this.id).appendChild(node)
     recordMoves(this.id);
     whoseTurn();
-    newH1();
+    newH1(won);
+    document.getElementById(this.id).removeEventListener("click", displayMove);
 }
-function newH1(){
-    document.getElementById("guide").innerHTML = "It's " + move + "'s turn"
+function newH1(won){
+    document.getElementById("guide").innerHTML = "It's " + move + "'s turn";
+    if (won == true){
+        whoseTurn();
+        document.getElementById("guide").innerHTML = move + " won!";
+    }
 }
 function recordMoves(theID){
     if (move == 'O'){
-        oMoves.push(parseInt(theID))
+        oMoves = oMoves + theID;
     }
     else if (move == 'X'){
-        xMoves.push(theID)
+        xMoves = xMoves + theID;
     }
-    if (winCombos.includes(oMoves)){
-        console.log('✌')
-    }
-    console.log(oMoves)
-    console.log(winCombos)
-    
-    for(var i=0;i<a.length;i++) 
-        if(a[i]!=b[i]) 
-          return "False"; 
-        return "True"; 
-    
+    if (winCombos.includes(xMoves) || winCombos.includes(oMoves)){
+        won = true;
+    }    
 }
