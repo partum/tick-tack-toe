@@ -18,7 +18,8 @@ for (i=0; i<9; i++){
     document.getElementById(i).addEventListener("click", displayMove);
 }
 setTimeout(newH1, 4000)
-
+var origBoard = Array.from(Array(9).keys());
+console.log(origBoard)
 
 function whoseTurn(){
     if (move == 'O'){
@@ -48,12 +49,14 @@ function newH1(won){
     }
 }
 function recordMoves(theID){
-    if (move == 'O'){
-        oMoves = oMoves + theID;
-    }
-    else if (move == 'X'){
-        xMoves = xMoves + theID;
-    }
+    // if (move == 'O'){
+    //     oMoves = oMoves + theID;
+    // }
+    // else if (move == 'X'){
+    //     xMoves = xMoves + theID;
+    // }
+    origBoard[theID] = move;
+    console.log(origBoard);
     if (winCombos.includes(xMoves) || winCombos.includes(oMoves)){
         won = true;
     }    
