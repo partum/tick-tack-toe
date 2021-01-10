@@ -4,14 +4,14 @@ var xMoves = ""
 var oMoves = []
 var won = false
 const winCombos = [
-    "012",
-    "345",
-    "678",
-    "036",
-    "147",
-    "258",
-    "048",
-    "246"
+    [0,1,2],
+    [3,4,5],
+    [6,7,8],
+    [0,3,6],
+    [1,4,7],
+    [2,5,8],
+    [0,4,8],
+    [2,4,6]
 ]
 const cells = document.querySelectorAll('.cells')
 for (i=0; i<9; i++){
@@ -59,7 +59,21 @@ function recordMoves(theID){
     console.log(origBoard);
     if (winCombos.includes(xMoves) || winCombos.includes(oMoves)){
         won = true;
-    }    
+    } 
+    let gameWon = checkWin();
+    if (gameWon) shutItDown();
+}
+function checkWin(){
+    let plays = origBoard.reduce((a, e, i) => 
+    (e == move) ? a.concat(i) : a, []);
+    let gameWon = null;
+    for (let [index, win] of winCombos.entries()) {
+		if (win.every(elem => plays.indexOf(elem) > -1)) {
+			gameWon = {index: index, move:move};
+			break;
+		}
+	}
+	return gameWon;
 }
 function shutItDown(){
     for (i=0; i<9; i++){
