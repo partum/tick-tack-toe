@@ -79,6 +79,7 @@ function shutItDown(){
     for (i=0; i<9; i++){
         document.getElementById(i).removeEventListener("click", displayMove);
     }
+    won = true;
     document.getElementById("start").style.visibility = "visible";
 }
 function setItUp(){
@@ -86,5 +87,8 @@ function setItUp(){
         document.getElementById(i).addEventListener("click", displayMove);
         document.getElementById(i).innerHTML = "";
     }
+    won = false;
     document.getElementById("start").style.visibility = "hidden";
+    origBoard = Array.from(Array(9).keys());
+    document.getElementById("guide").innerHTML = "Welcome to tick-tack-toe!";
 }
